@@ -47,4 +47,9 @@ public class ProjectController {
         projectService.addTimeToProject(id, hours, description);
         return "redirect:/project/" + id;  // Redirect back to the project view page
     }
+    @PostMapping("/{id}/delete")
+    public String deleteProject(@PathVariable Long id) {
+        projectService.deleteProject(id);
+        return "redirect:/project";  // Redirect to the project list page after deletion
+    }
 }

@@ -6,7 +6,6 @@ import de.ba.auth.auth.repo.ProjectRepo;
 import de.ba.auth.auth.repo.TimeEntryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -35,5 +34,8 @@ public class ProjectService {
             TimeEntry timeEntry = new TimeEntry(hours, description, project);
             timeEntryRepo.save(timeEntry);  // This will now work as timeEntryRepo is properly autowired
         }
+    }
+    public void deleteProject(Long id) {
+        projectRepository.deleteById(id);
     }
 }
