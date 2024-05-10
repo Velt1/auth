@@ -29,7 +29,29 @@
                 <strong>Status:</strong>
                 <span th:text="${project.status}">Status</span>
             </p>
+            <!-- Error Message Display -->
+            <div th:if="${error}" class="alert alert-danger" role="alert">
+                <p th:text="${error}">Error message here</p>
+            </div>
 
+
+            <!-- Display time entries -->
+            <div class="mt-4">
+                <h4>Time Entries</h4>
+                <ul>
+                    <li th:each="timeEntry : ${project.timeEntries}">
+                        <p>
+                            <strong>Hours Spent:</strong> <span th:text="${timeEntry.hours}"></span>
+                            <br>
+                            <strong>Description:</strong> <span th:text="${timeEntry.description}"></span>
+                            <br>
+                            <strong>Logged By:</strong> <span th:text="${timeEntry.user.username}"></span>
+                            <br>
+                            <strong>Status:</strong> <span th:text="${timeEntry.status}"></span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
 
             <!-- Time management section -->
             <div class="mt-4">
@@ -46,6 +68,7 @@
                     <button type="submit" class="btn btn-success">Log Time</button>
                 </form>
             </div>
+
 
             <!-- Delete button -->
             <form th:action="@{/project/{id}/delete(id=${project.id})}" method="post">

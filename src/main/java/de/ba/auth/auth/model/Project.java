@@ -1,14 +1,12 @@
 package de.ba.auth.auth.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -27,15 +25,28 @@ public class Project {
     private Date endDate;
     private String status;
 
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<TimeEntry> timeEntries;
+
+    // Getters and Setters
+    public Set<TimeEntry> getTimeEntries() {
+        return timeEntries;
+    }
+
+    public void setTimeEntries(Set<TimeEntry> timeEntries) {
+        this.timeEntries = timeEntries;
+    }
+
     // Constructors
     public Project() {}
 
     public Project(String name, String description, Date startDate, Date endDate, String status) {
         this.name = name;
         this.description = description;
-        this.startDate = null;
-        this.endDate = null;
-        this.status = "todo";
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
     }
+
 
 }
